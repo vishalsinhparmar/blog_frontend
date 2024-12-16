@@ -1,6 +1,7 @@
 import {Outlet, useNavigate } from "react-router-dom"
 import About from "./About"
 import PasswordComponets from "./PasswordComponets"
+import homeImage from '../assets/image/homepage.jpg'
 
 function Home() {
   const navigate = useNavigate()
@@ -11,7 +12,7 @@ function Home() {
   <div
     className="w-full h-screen bg-no-repeat bg-cover bg-center mx-auto "
     style={{
-      backgroundImage: "url('/image/eleonora-gaini-xom4ykz-WIg-unsplash.jpg')",
+      backgroundImage: `url(${homeImage})`,
     }}
   >
     <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">

@@ -1,10 +1,14 @@
+import mission_image from '../assets/image/mission_image.jpg'
+import cofounder from '../assets/image/cofounder.jpg'
+import founder from '../assets/image/founder.jpg'
+import desigener from '../assets/image/desigener.jpg'
 
 function About() {
   return (
     <>
     <div className="bg-gray-100 min-h-screen">
   <div className="w-full bg-cover bg-center h-80" 
-       style={{ backgroundImage: "url('/image/about-page-banner.jpg')" }}>
+       style={{ backgroundImage: "url('../assets/image/eleonora-gaini-xom4ykz-WIg-unsplash.jpg')" }}>
     <div className="flex items-center justify-center h-full bg-black bg-opacity-50">
       <h1 className="text-white text-4xl md:text-5xl font-bold">
         About Us
@@ -33,7 +37,7 @@ function About() {
       </div>
       <div>
         <img
-          src="../../public/image/mission_image.jpg"
+          src= {mission_image}
           alt="Our Mission"
           className="rounded-lg shadow-lg"
         />
@@ -47,7 +51,7 @@ function About() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
         <div className="text-center">
           <img
-            src="../../public/image/founder.jpg"
+            src={founder}
             alt="Team Member"
             className="w-40 h-40 mx-auto rounded-full shadow-lg mb-4"
           />
@@ -56,7 +60,7 @@ function About() {
         </div>
         <div className="text-center">
           <img
-            src="../../public/image/co_founder.jpg"
+            src={cofounder}
             alt="Team Member"
             className="w-40 h-40 mx-auto rounded-full shadow-lg mb-4"
           />
@@ -65,7 +69,7 @@ function About() {
         </div>
         <div className="text-center">
           <img
-            src="../../public/image/desigener.jpg"
+            src={desigener}
             alt="Team Member"
             className="w-40 h-40 mx-auto flex justify-center bg-cover rounded-full shadow-lg mb-4"
           />
