@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
+import CONFIG from '../config'
 function Blog() {
+    console.log('the config file',CONFIG.API_BASE_URL)
     const token = localStorage.getItem("token");
     const [blog, setBlog] = useState([]);
     const navigate = useNavigate();
@@ -26,7 +27,7 @@ function Blog() {
 
     const fetchBlog = async (page) => {
         try {
-            const res = await fetch(`http://localhost:5000/api/blog/showblog?page=${page}&limit=${3} `, {
+            const res = await fetch(`${CONFIG.API_BASE_URL}/api/blog/showblog?page=${page}&limit=${3} `, {
                 headers: { Authorization: `Bearer ${token}` },
                 method: 'GET'
             });

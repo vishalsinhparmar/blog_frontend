@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { myContext } from '../Contextcomponets/CreateContext';
 import PasswordComponets from '../PasswordComponets';
+import CONFIG from '../../config'
+
 
 function SignIn() {
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ function SignIn() {
     const { email, password } = Form;
 
     try {
-      const res = await fetch('http://localhost:5000/api/auth/SignIn', {
+      const res = await fetch(`${CONFIG.API_BASE_URL}/api/auth/SignIn`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -34,6 +36,7 @@ function SignIn() {
 
       if (res.ok) {
         const result = await res.json();
+        console.log('result is',result)
         if (result.token) {
           localStorage.setItem('token', result.token);
           setuserToken(result.token);

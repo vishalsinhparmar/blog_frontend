@@ -3,6 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import {formatDistanceToNow, isDate} from 'date-fns'
 import {MdOutlineAccessTimeFilled } from 'react-icons/md'
 import { myContext } from './Contextcomponets/CreateContext';
+import CONFIG from '../config'
+
 function DetailBlog() {
     const {user} = useContext(myContext)
     const navigate = useNavigate();
@@ -29,7 +31,7 @@ function DetailBlog() {
         }
 
         try {
-            const res = await fetch(`http://localhost:5000/api/blog/blogByid/${id}`, {
+            const res = await fetch(`${CONFIG.API_BASE_URL}/api/blog/blogByid/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
                 method: 'GET',
             });
@@ -54,7 +56,7 @@ function DetailBlog() {
     const commentPostsubmit = async (e)=>{
         e.preventDefault();
     try{
-        const res = await fetch(`http://localhost:5000/api/blog/blogbyid/${id}/comment`,{
+        const res = await fetch(`${CONFIG.API_BASE_URL}/api/blog/blogbyid/${id}/comment`,{
            method:'POST',
            headers:{
             'Content-Type': 'application/json',
@@ -62,12 +64,12 @@ function DetailBlog() {
                    },
            body: JSON.stringify({comment})
         });
-
+         console.log('comment',res)
         if(res.ok){
             const data = await res.json();
             console.log('the data of the commets',data);
             setcomment('')
-         commentPostshhow()
+            commentPostshhow()
 
         } else{
              setError("somehing went wrong with the error")
@@ -81,7 +83,7 @@ function DetailBlog() {
     const commentPostshhow = async ()=>{
        
     try{
-        const res = await fetch(`http://localhost:5000/api/blog/blogbyid/${id}/comment`,{
+        const res = await fetch(`${CONFIG.API_BASE_URL}/api/blog/blogbyid/${id}/comment`,{
            method:'GET',
            headers:{Authorization: `Bearer ${token}`}
         });

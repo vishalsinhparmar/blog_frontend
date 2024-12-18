@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-
+import CONFIG from '../config'
 function BLoglistUser() {
     const {id} = useParams();
     const token = localStorage.getItem('token')
@@ -11,7 +11,7 @@ function BLoglistUser() {
         
      
       try{
-        const res = await fetch(`http://localhost:5000/api/blog/blogByUserid/${id}`,{
+        const res = await fetch(`${CONFIG.API_BASE_URL}/api/blog/blogByUserid/${id}`,{
           
         headers:{Authorization:`Bearer ${token}`},
 

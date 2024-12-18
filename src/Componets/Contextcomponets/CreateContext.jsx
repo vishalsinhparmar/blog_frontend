@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-
+import CONFIG from '../../config'
 const myContext = createContext();
 const Myprovider = ({children})=>{
     const [usertoken,setuserToken] = useState(localStorage.getItem('token'))
@@ -14,7 +14,7 @@ const Myprovider = ({children})=>{
     console.log('the userAuth token',usertoken);
     const userdata = async ()=>{
         if(!usertoken) return;
-        const res = await fetch(' http://localhost:5000/api/auth/user',{
+        const res = await fetch(`${CONFIG.API_BASE_URL}/api/auth/user`,{
           headers:{
             Authorization: `Bearer ${usertoken}`
           },

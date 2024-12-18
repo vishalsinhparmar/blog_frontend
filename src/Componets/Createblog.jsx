@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from 'react'
 import { myContext } from './Contextcomponets/CreateContext';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { FcAddImage} from 'react-icons/fc'
+import CONFIG from '../config'
+
 
 function CreateBlog() {
   const token = localStorage.getItem('token');
@@ -10,13 +12,13 @@ function CreateBlog() {
   const [blog, setBlog] = useState({ title: "", description: "" });
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState(null);
- 
+  console.log('updae image path',image)
   console.log('the img for the id');
 
   useEffect(() => {
     if (id) {
       const updateFetch = async () => {
-        const res = await fetch(`http://localhost:5000/api/blog/blogUpdatebyid/${id}`, {
+        const res = await fetch(`${CONFIG.API_BASE_URL}/api/blog/blogUpdatebyid/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         if (res.ok) {
@@ -47,11 +49,11 @@ function CreateBlog() {
       const formData = new FormData();
       formData.append('title', blog.title);
       formData.append('description', blog.description);
-      if (image) {
+      if (image && typeof image !== "string") {
         formData.append('image', image);
       }
 
-      const url = id ? `http://localhost:5000/api/blog/UserblogUpdte/${id}` : `http://localhost:5000/api/blog/createBlog`;
+      const url = id ? `${CONFIG.API_BASE_URL}/api/blog/UserblogUpdte/${id}` : `${CONFIG.API_BASE_URL}/api/blog/createBlog`;
       console.log('the url is a', url);
 
       const method = id ? 'PATCH' : 'POST';
@@ -110,7 +112,8 @@ function CreateBlog() {
   ) : (
     <img src={URL.createObjectURL(image)} alt="preview" className="mt-4 w-32 h-32 object-cover rounded-lg" />
   )
-)}          </div>
+)}       
+   </div>
 
           {/* Title Input */}
           <div className="mb-4">

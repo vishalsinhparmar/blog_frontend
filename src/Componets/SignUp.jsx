@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import CONFIG from '../config'
 
 function SignUp() {
   const [Form, setForm] = useState({ username: '', email: '', password: '' });
@@ -30,7 +31,7 @@ function SignUp() {
         formData.append('image', image);
       }
 
-      const res = await fetch('http://localhost:5000/api/auth/SignUp', {
+      const res = await fetch('${CONFIG.API_BASE_URL}api/auth/SignUp', {
         method: 'POST',
         body: formData
       });

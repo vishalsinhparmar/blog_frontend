@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import {TfiEmail} from 'react-icons/tfi'
 import {FcApproval} from 'react-icons/fc'
 import { Link, useParams } from 'react-router-dom';
+import CONFIG from '../../config'
+
 function VerifyuserBymail() {
   const [data,setdata] = useState();
   const {token} = useParams();
@@ -11,7 +13,7 @@ function VerifyuserBymail() {
   const fetchMessage = async () => {
     console.log('verifyToken',token)
     try {
-        const res = await fetch(`http://localhost:5000/api/auth/verifyemail/${token}`, {
+        const res = await fetch(`${CONFIG.API_BASE_URL}/api/auth/verifyemail/${token}`, {
             headers: {'Content-Type':'json/application' },
             method: 'GET'
         });

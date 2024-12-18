@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { myContext } from './Contextcomponets/CreateContext';
 import {MdDeleteForever} from 'react-icons/md'
 import { useNavigate } from 'react-router-dom';
+import CONFIG from '../config'
 
 function User() {
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ function User() {
 
     const deleteBlog = async (id) => {
         try {
-            const res = await fetch(`http://localhost:5000/api/blog/Userblogdelete/${id}`, {
+            const res = await fetch(`${CONFIG.API_BASE_URL}/api/blog/Userblogdelete/${id}`, {
                 method: "DELETE",
                 headers: { Authorization: `Bearer ${token}` }
             });
@@ -33,7 +34,7 @@ function User() {
     useEffect(() => {
         const userBlog = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/blog/Userblog', {
+                const res = await fetch(`${CONFIG.API_BASE_URL}/api/blog/Userblog`, {
                     method: "GET",
                     headers: { Authorization: `Bearer ${token}` }
                 });

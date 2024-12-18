@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import PasswordComponets from '../PasswordComponets';
 import {MdMarkEmailRead} from 'react-icons/md'
+import CONFIG from '../../config'
+
 
 function NewPassword() {
   const { token } = useParams();
@@ -22,7 +24,7 @@ function NewPassword() {
     console.log('userPassword', userPassword);
     setLoading(true)
     try {
-      const res = await fetch(`http://localhost:5000/api/auth/resetpassword/${token}`, {
+      const res = await fetch(`${CONFIG.API_BASE_URL}/api/auth/resetpassword/${token}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ newpassword: userPassword }),
