@@ -8,13 +8,13 @@ import About from './Componets/About'
 import Blog from './Componets/Blog'
 import DetailBlog from './Componets/DetailBlog'
 import Createblog from './Componets/Createblog'
-import User from './Componets/user'
 import BLoglistUser from './Componets/BLoglistUser'
 import SignUp from './Componets/Auth/SignUp'
 import SignIn from './Componets/Auth/SignIn'
 import ForgotPassword from './Componets/Auth/Forgottepassword'
 import NewPassword from './Componets/Auth/Newpassword'
 import VerifyuserBymail from './Componets/Auth/VerifyuserBymail'
+import User from './Componets/User'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
