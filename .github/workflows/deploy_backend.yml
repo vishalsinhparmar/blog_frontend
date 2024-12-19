@@ -1,24 +1,25 @@
-name: Deploy Backend
+name: Deploy Frontend to Vercel
 
 on:
   push:
     branches:
-      - main  # Triggers when changes are pushed to the `main` branch
+      - main
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest  # Run on the latest version of Ubuntu
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v2  # Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Trigger Render Deploy via API
-      run: |
-        curl -X POST \
-          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
-          "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys"
-      # Explanation:
-      # - The curl command uses the Render API to trigger a deployment.
-      # - Authorization: Bearer ${{ secrets.RENDER_API_KEY }} sends the API key for authentication.
-      # - The Service ID is passed in the URL to specify which service to deploy.
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+        run: |
+          npx vercel --token $VERCEL_TOKEN --prod
