@@ -25,11 +25,13 @@ function VerifyuserBymail() {
     }
 };
 
-if(token){
+
 useEffect(() => {
+  if(token){
   fetchMessage();
-}, []);
 }
+}, []);
+
   return (
     <>
     {/* <p>verify email</p> */}
