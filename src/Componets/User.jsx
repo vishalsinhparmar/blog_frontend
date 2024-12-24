@@ -8,10 +8,11 @@ function User() {
     // const { userblog, setUserblog } = useContext(myContext);
     const [userBlogdata,setUserblogdata] = useState([])
     const token = localStorage.getItem('token');
-
+    const [loading,setloading] = useState(false);
  
 
     const deleteBlog = async (id) => {
+        setloading(true)
         try {
             const res = await fetch(`${CONFIG.API_BASE_URL}/api/blog/Userblogdelete/${id}`, {
                 method: "DELETE",
@@ -27,11 +28,14 @@ function User() {
             }
         } catch (err) {
             console.log(err.message);
+        } finally{
+            setloading(false)
         }
     };
 
     useEffect(() => {
         const userBlog = async () => {
+            setloading(true)
             try {
                 const res = await fetch(`${CONFIG.API_BASE_URL}/api/blog/Userblog`, {
                     method: "GET",
@@ -46,6 +50,8 @@ function User() {
                 }
             } catch (err) {
                 console.log(err.message);
+            }finally{
+                setloading(false)
             }
         };
         userBlog();
@@ -57,8 +63,17 @@ function User() {
                 <h1 className="text-2xl font-semibold text-blue-600">User Blogs</h1>
                 <hr className="w-1/4 border-b-2 mx-auto mt-3 border-blue-300" />
             </div>
+
+            {loading ? (
+                <div className="flex justify-center items-center h-64">
+                <div className=" ease-linear animate-spin rounded-full border-4 border-t-4 border-blue-400 h-12 w-12"></div>
+            </div>
+            ):(
+                <>
+                
+            
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-5">
-                {userBlogdata ? (
+                {userBlogdata.length > 0 ? (
                     userBlogdata.map((blog) => (
                         <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300" key={blog._id}>
                             <h3 className="text-blue-700 text-center text-xl font-semibold mb-3">
@@ -85,11 +100,16 @@ function User() {
                 ) : (
                     <div className="col-span-3 text-center text-xl text-gray-500 mt-5">
                         <p>You have no blogs yet.</p>
+                        <button onClick={()=> navigate(`/createBlog`)} className='text-blue-400 border border-black  px-2 py-1 mt-5'>createBlog</button>
                     </div>
                 )}
             </div>
+            </>
+            )}
         </div>
+        
     );
 }
+
 
 export default User;

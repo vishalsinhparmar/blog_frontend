@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { myContext } from '../Contextcomponets/CreateContext';
 import PasswordComponets from '../PasswordComponets';
 import CONFIG from '../../config'
+import {toast} from 'react-toastify'
 
 
 function SignIn() {
@@ -38,11 +39,17 @@ function SignIn() {
         const result = await res.json();
         console.log('result is',result)
         if (result.token) {
+          toast.success('Login Successful!');
           localStorage.setItem('token', result.token);
           setuserToken(result.token);
           setForm({ email: '', password: '' });
-          setError(null); 
-          navigate('/');
+          setError(null);
+          
+
+             
+            navigate('/');
+
+           
         } else {
           setError('Invalid credentials. Please try again.'); // Set error message if no token
         }
