@@ -38,7 +38,7 @@ useEffect(() => {
     {
      token &&  data ? (
        
-        <div className='max-w-full mx-auto items-center flex justify-center my-4 '>
+        <div className='w-full mx-auto items-center flex justify-center my-4 '>
         <div className='flex  flex-col justify-center items-center h-56 border shadow-lg border-dotted px-4 w-1/2 max-w-1/2 rounded-lg bg-blue-50 '>
             <p className='text-black font-semibold text-xl'>{data?.message}</p>
              <span><FcApproval className=' text-6xl'/></span>
@@ -51,8 +51,8 @@ useEffect(() => {
       ):(
 
         <>
-                   <div className='max-w-full mx-auto items-center flex justify-center my-4 '>
-           <div className='flex  flex-col justify-center items-center h-56 border shadow-lg border-dotted px-4 w-1/2 max-w-1/2 rounded-lg bg-blue-100 '>
+                   <div className='w-full mx-auto items-center flex justify-center my-4 '>
+           <div className='flex   flex-col justify-center items-center h-56 border shadow-lg border-dotted px-4 lg:w-1/2 w-3/4 rounded-lg bg-blue-100 '>
             <p className='text-black font-semibold text-xl'>You can verify to check your Mail and click on the link</p>
             <TfiEmail className='text-4xl text-blue-700 mt-4'/>
          <p>{data?.message}</p>

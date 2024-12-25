@@ -20,40 +20,43 @@ function Header() {
 
   return (
     <nav className="bg-gray-800 w-full shadow-lg">
-      {/* Toggle Button for Small Screens */}
-      <div className="absolute top-0 right-0 p-4 md:hidden">
-        {toggle ? (
-          <IoCloseOutline
-            onClick={handleToggle}
-            className="text-2xl text-white cursor-pointer "
-          />
-        ) : (
-          <FiGrid
-            onClick={handleToggle}
-            className="text-2xl text-white cursor-pointer bg-black"
-          />
-        )}
-      </div>
+      <div className="flex items-center justify-between p-4 md:py-4 md:px-8">
+        {/* Logo or Home Link */}
+        <div>
+          <Link to="/" className="text-white text-xl font-bold">
+            blog
+          </Link>
+        </div>
 
-      {/* Navigation Menu */}
-      <div
-        className={`${
-          toggle ? "block" : "hidden"
-        } md:flex md:items-center md:justify-between w-full`}
-      >
-        <ul
+        {/* Toggle Button for Small Screens */}
+        <div className="md:hidden">
+          {toggle ? (
+            <IoCloseOutline
+              onClick={handleToggle}
+              className="text-2xl text-white cursor-pointer"
+            />
+          ) : (
+            <FiGrid
+              onClick={handleToggle}
+              className="text-2xl text-white cursor-pointer"
+            />
+          )}
+        </div>
+
+        {/* Navigation Menu */}
+        <div
           className={`${
-            toggle ? "flex flex-col items-center" : "flex"
-          } w-full p-4 md:flex md:flex-row md:items-center md:justify-between`}
+            toggle ? "block" : "hidden"
+          } absolute top-16 left-0 w-full bg-gray-800 md:static md:w-auto md:flex md:items-center`}
         >
-          {/* Navigation Links */}
-          <div
-            className={`${
-              toggle ? "flex flex-col gap-4" : "flex gap-8"
-            } items-center`}
-          >
+          <ul className="flex flex-col md:flex-row md:items-center md:gap-8 text-center">
+            {/* Navigation Links */}
             <li>
-              <Link to="/" className="text-white text-lg hover:text-gray-400">
+              <Link
+                to="/"
+                className="text-white text-lg hover:text-gray-400 py-2 md:py-0"
+                onClick={() => settoggle(false)}
+              >
                 Home
               </Link>
             </li>
@@ -63,8 +66,9 @@ function Header() {
                 className={({ isActive }) =>
                   `text-lg ${
                     isActive ? "text-yellow-400" : "text-white"
-                  } hover:text-gray-400`
+                  } hover:text-gray-400 py-2 md:py-0`
                 }
+                onClick={() => settoggle(false)}
               >
                 About
               </NavLink>
@@ -72,53 +76,62 @@ function Header() {
             <li>
               <Link
                 to="/blogs"
-                className="text-white text-lg hover:text-gray-400"
+                className="text-white text-lg hover:text-gray-400 py-2 md:py-0"
+                onClick={() => settoggle(false)}
               >
                 Blogs
               </Link>
             </li>
-          </div>
 
-          {/* User Authentication Links */}
-          <div className="flex items-center gap-5">
-            {!user ? (
-              <>
-                <li>
-                  <Link
-                    to="/SignUp"
-                    className="text-yellow-400 text-lg border-2 border-yellow-400 rounded-full px-4 py-1 hover:bg-yellow-400 hover:text-black"
+            {/* User Authentication Links */}
+            <div className="mt-4 md:mt-0 flex flex-col md:flex-row md:items-center md:gap-5">
+              {!user ? (
+                <>
+                  <li className="">
+                    <Link
+                      to="/SignUp"
+                      className="text-yellow-400 text-lg border-2 border-yellow-400 rounded-full px-4 py-1 hover:bg-yellow-400 hover:text-black"
+                      onClick={() => settoggle(false)}
+                    >
+                      Sign Up
+                    </Link>
+                  </li>
+                  <li className="my-4 lg:my-0">
+                    <Link
+                      to="/SignIn"
+                      className="text-white text-lg border-2 border-white rounded-full px-4 py-1 hover:bg-white hover:text-black"
+                      onClick={() => settoggle(false)}
+                    >
+                      Sign In
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <div className="flex items-center justify-center gap-4">
+                  <p className="text-white text-lg">{user.username}</p>
+                  <img
+                    className="w-10 h-10 rounded-full border-2 border-yellow-400 cursor-pointer"
+                    src={user.image}
+                    alt="User Avatar"
+                    onClick={() => {
+                      navigate("/user");
+                      settoggle(false);
+                    }}
+                  />
+                  <button
+                    className="bg-red-500 text-white px-4 py-1 rounded-full hover:bg-red-700"
+                    onClick={() => {
+                      Logout();
+                      settoggle(false);
+                    }}
                   >
-                    Sign Up
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/SignIn"
-                    className="text-white text-lg border-2 border-white rounded-full px-4 py-1 hover:bg-white hover:text-black"
-                  >
-                    Sign In
-                  </Link>
-                </li>
-              </>
-            ) : (
-              <div className="flex items-center gap-4">
-                <p className="text-white text-lg">{user.username}</p>
-                <img
-                  className="w-10 h-10 rounded-full border-2 border-yellow-400 cursor-pointer"
-                  src={user.image}
-                  alt="User Avatar"
-                  onClick={() => navigate("/user")}
-                />
-                <button
-                  className="bg-red-500 text-white px-4 py-1 rounded-full hover:bg-red-700"
-                  onClick={Logout}
-                >
-                  Logout
-                </button>
-              </div>
-            )}
-          </div>
-        </ul>
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          </ul>
+        </div>
       </div>
     </nav>
   );

@@ -3,8 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { myContext } from '../Contextcomponets/CreateContext';
 import PasswordComponets from '../PasswordComponets';
 import CONFIG from '../../config'
-import {toast} from 'react-toastify'
-
+import Swal from 'sweetalert2'
 
 function SignIn() {
   const navigate = useNavigate();
@@ -39,12 +38,12 @@ function SignIn() {
         const result = await res.json();
         console.log('result is',result)
         if (result.token) {
-          toast.success('Login Successful!');
+          
           localStorage.setItem('token', result.token);
           setuserToken(result.token);
           setForm({ email: '', password: '' });
           setError(null);
-          
+          Swal.fire('sigIn','user have sigin successfully')
 
              
             navigate('/');

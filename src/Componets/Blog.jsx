@@ -60,12 +60,12 @@ function Blog() {
 
     if (!token) {
         return (
-            <div className="flex justify-center items-center mx-auto mt-5 p-5 border rounded-lg bg-zinc-50">
-                <h3 className="font-semibold inline-flex">
+            <div className="flex justify-center items-center mx-auto  w-full py-5  rounded-lg bg-zinc-50">
+                <h3 className="font-semibold lg:inline-flex">
                     The user is not logged in. Please log in first.
                     <button
                         onClick={() => navigate('/SignIn')}
-                        className="mx-3 bg-lime-300 hover:bg-lime-400 px-2 rounded-md"
+                        className="mx-3 bg-lime-300 hover:bg-lime-400 px-2 rounded-md text-center"
                     >
                         SignIn
                     </button>
@@ -78,7 +78,7 @@ function Blog() {
         const pages = Array.from({ length: totalpage }, (_, i) => i + 1);
         return pages.map((num) => (
             <>
-                <button className={` px-3 rounded-md mx-3 py-1 ${num === currentPage ? 'bg-blue-400 text-white' : 'bg-black text-white'}`} onClick={() => handlePagechnage(num)} value={num} >{num}</button>
+                <button className={` px-3  rounded-md mx-3 py-1 ${num === currentPage ? 'bg-blue-400 text-white' : 'bg-black text-white hover:bg-blue-400'}`} onClick={() => handlePagechnage(num)} value={num} >{num}</button>
             </>
         ))
     }
@@ -92,7 +92,7 @@ function Blog() {
 
 
                 <button
-                    className="bg-blue-400 rounded-lg px-4 py-2 text-white hover:text-black hover:bg-transparent border border-black outline-none"
+                    className="bg-blue-400 rounded-lg px-4 py-2 text-white border-none hover:text-black hover:bg-transparent  outline-none"
                     onClick={() => navigate('/createBlog')}
                 >
                     Create Blog
@@ -135,7 +135,7 @@ function Blog() {
 
                                     <div className="flex justify-between items-center mt-5">
                                         <h1 className="text-black font-medium">
-                                            <span className="text-blue-800">Author: </span>
+                                            <span className="text-blue-800">Author:</span>
                                         </h1>
                                         <div className="flex items-center">
                                             <h2 className="text-green-500">{li.authorId?.username}</h2>
